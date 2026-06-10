@@ -1,0 +1,716 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Arvil Raj — Product Engineer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet"/>
+<style>
+*{box-sizing:border-box;margin:0;padding:0;}
+:root{
+  --blue:#0073E6;--blue-dark:#005BB5;--blue-light:#E8F3FF;
+  --navy:#0D1B2A;--cream:#F7F6F3;--white:#fff;
+  --rule:rgba(13,27,42,0.09);--rule2:rgba(13,27,42,0.15);
+  --tp:#0D1B2A;--ts:#4A5568;--tm:#6B7A8D;
+  --green:#0F6E56;--green-bg:#E1F5EE;
+  --red-bg:#FAECE7;--red:#993C1D;--red-mid:#F0997B;
+  --serif:'DM Serif Display',Georgia,serif;
+  --sans:'DM Sans',-apple-system,sans-serif;
+  --max:720px;
+}
+html{scroll-behavior:smooth;}
+body{font-family:var(--sans);background:var(--white);color:var(--tp);-webkit-font-smoothing:antialiased;}
+
+/* ── BACKGROUND IMAGE ── */
+body::before{
+  content:'';
+  position:fixed;
+  inset:0;
+  background:url('image.webp') center bottom / cover no-repeat;
+  opacity:0.82;
+  pointer-events:none;
+  z-index:0;
+  -webkit-transform:translateZ(0);
+  transform:translateZ(0);
+}
+@media(max-width:768px){
+  body::before{
+    position:absolute;
+    width:100%;
+    min-height:100%;
+  }
+}
+
+/* ── LAYOUT ── */
+.wrap{max-width:var(--max);margin:0 auto;padding:0 1.5rem;position:relative;z-index:1;}
+
+/* ── HERO ── */
+.hero{padding:3rem 0 2.25rem;}
+.av-row{display:flex;align-items:center;gap:14px;margin-bottom:1.75rem;}
+.avatar{width:68px;height:68px;border-radius:50%;background:var(--blue-light);border:2px solid var(--blue);display:flex;align-items:center;justify-content:center;font-family:var(--serif);font-size:20px;color:var(--blue-dark);flex-shrink:0;overflow:hidden;}
+.avatar img{width:100%;height:100%;object-fit:cover;border-radius:50%;}
+.av-name{font-size:18px;font-weight:500;color:var(--tp);letter-spacing:-0.01em;text-shadow:0 0 10px rgba(255,255,255,0.95);}
+.av-role{font-size:13px;color:var(--tp);margin-top:3px;text-shadow:0 0 8px rgba(255,255,255,0.95);}
+.av-links{display:flex;gap:14px;margin-top:8px;flex-wrap:wrap;}
+.hlink{font-size:12px;color:var(--tp);display:flex;align-items:center;gap:4px;text-decoration:none;transition:color 0.15s;cursor:pointer;letter-spacing:0.01em;background:none;border:none;font-family:var(--sans);text-shadow:0 0 8px rgba(255,255,255,0.95);}
+.hlink:hover{color:var(--blue);}
+.hlink svg{width:14px;height:14px;flex-shrink:0;}
+.hero-hl{font-family:var(--serif);font-size:clamp(24px,5vw,32px);line-height:1.2;color:var(--navy);margin-bottom:1rem;letter-spacing:-0.02em;text-shadow:0 0 14px rgba(255,255,255,0.98),0 0 30px rgba(255,255,255,0.7);}
+.hero-hl em{font-style:italic;color:var(--tp);}
+.hero-body{font-size:16px;color:var(--tp);line-height:1.75;max-width:520px;margin-bottom:1.75rem;text-shadow:0 0 10px rgba(255,255,255,0.95),0 0 22px rgba(255,255,255,0.6);}
+.wm-btn{display:inline-flex;align-items:center;gap:7px;font-size:13px;font-weight:500;color:var(--white);background:var(--blue);padding:10px 20px;border-radius:5px;border:none;cursor:pointer;font-family:var(--sans);transition:background 0.15s;letter-spacing:0.01em;}
+.wm-btn:hover{background:var(--blue-dark);}
+.wm-btn svg{width:15px;height:15px;}
+
+/* ── CATEGORIES ── */
+.cats{padding:2rem 0 3rem;}
+.cat{border:0.5px solid var(--rule);border-radius:8px;margin-bottom:12px;overflow:hidden;transition:border-color 0.2s;}
+.cat:hover{border-color:rgba(0,115,230,0.3);}
+.cat.open{border-color:var(--blue);}
+.cat-hd{position:relative;overflow:hidden;display:flex;align-items:flex-start;gap:1rem;padding:1.1rem 1.25rem;cursor:pointer;background:var(--white);transition:background 0.2s;user-select:none;}
+.cat.open .cat-hd{background:var(--blue);}
+.cat-info{flex:1;position:relative;z-index:1;}
+.cat-title{font-size:16px;font-weight:500;color:var(--tp);margin-bottom:2px;letter-spacing:-0.01em;transition:color 0.2s;}
+.cat.open .cat-title{color:var(--white);}
+.cat-desc{font-size:14px;color:var(--tm);line-height:1.5;transition:color 0.2s;}
+.cat.open .cat-desc{color:rgba(255,255,255,0.55);}
+.cat-arr{color:var(--tm);width:16px;height:16px;flex-shrink:0;padding-top:3px;transition:transform 0.2s,color 0.2s;position:relative;z-index:1;}
+.cat.open .cat-arr{transform:rotate(90deg);color:rgba(255,255,255,0.45);}
+.cat-body{display:none;background:var(--cream);}
+.cat.open .cat-body{display:block;}
+
+/* ── WORK ITEMS ── */
+.wi{padding:1.5rem;border-bottom:0.5px solid var(--rule);}
+.wi:last-child{border-bottom:none;}
+.wi-ey{font-size:11px;color:var(--tm);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:6px;}
+.wi-title{font-family:var(--serif);font-size:19px;color:var(--navy);margin-bottom:8px;line-height:1.3;}
+.wi-body{font-size:16px;color:var(--tp);line-height:1.78;margin-bottom:12px;}
+.wi-body strong{color:var(--tp);font-weight:500;}
+.wi-tags{display:flex;gap:5px;flex-wrap:wrap;margin-bottom:10px;}
+.tag{font-size:11px;padding:3px 8px;border-radius:3px;background:var(--white);border:0.5px solid var(--rule2);color:var(--ts);letter-spacing:0.02em;}
+.tag.live{background:var(--green-bg);color:var(--green);border-color:rgba(15,110,86,0.25);}
+.tag.blue{background:var(--blue-light);color:var(--blue-dark);border-color:rgba(0,115,230,0.2);}
+.wi-result{font-size:14px;color:var(--blue);font-weight:500;letter-spacing:0.01em;}
+
+/* ── PLACEHOLDER IMAGE ── */
+.img-ph{width:100%;aspect-ratio:16/9;background:var(--white);border:0.5px solid var(--rule2);border-radius:6px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;margin-bottom:12px;}
+.img-ph svg{width:26px;height:26px;color:var(--tm);opacity:0.4;}
+.img-ph span{font-size:11px;color:var(--tm);letter-spacing:0.04em;}
+
+/* ── QUEUE DEMO ── */
+.qv{background:var(--white);border:0.5px solid var(--rule2);border-radius:6px;padding:1.1rem;margin-bottom:12px;}
+.qv-ey{font-size:11px;color:var(--tm);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:10px;}
+.cnt-row{display:flex;gap:8px;margin-bottom:10px;}
+.cnt{flex:1;background:var(--cream);border-radius:4px;padding:8px;text-align:center;}
+.cnt-n{font-family:var(--serif);font-size:20px;color:var(--navy);line-height:1;}
+.cnt-n.r{color:var(--red);}.cnt-n.g{color:var(--green);}.cnt-n.b{color:var(--blue);}
+.cnt-l{font-size:10px;color:var(--tm);text-transform:uppercase;letter-spacing:0.06em;margin-top:2px;}
+.ev-row{display:flex;gap:3px;flex-wrap:wrap;min-height:28px;align-items:center;margin-bottom:7px;}
+.ev{width:21px;height:21px;border-radius:3px;display:flex;align-items:center;justify-content:center;font-size:8px;font-weight:500;border:0.5px solid transparent;flex-shrink:0;}
+.ev.hot{background:var(--red-bg);border-color:var(--red-mid);color:var(--red);}
+.ev.ok{background:var(--green-bg);border-color:rgba(15,110,86,0.3);color:var(--green);}
+.ev.dim{opacity:0.18;}
+.qv-status{font-size:12px;min-height:17px;font-weight:500;}
+.qv-status.bad{color:var(--red);}.qv-status.good{color:var(--green);}.qv-status.idle{color:var(--tm);}
+.q-controls{display:flex;gap:7px;margin:10px 0;flex-wrap:wrap;}
+.qbtn{font-size:12px;padding:6px 12px;border-radius:4px;border:0.5px solid var(--rule2);background:var(--white);color:var(--tp);cursor:pointer;font-family:var(--sans);transition:all 0.15s;}
+.qbtn:hover{border-color:var(--blue);color:var(--blue);}
+.qbtn.p{background:var(--blue);color:var(--white);border-color:var(--blue);}
+.qbtn.p:hover{background:var(--blue-dark);}
+.qbtn:disabled{opacity:0.35;cursor:not-allowed;pointer-events:none;}
+.ms-row{display:flex;align-items:center;gap:10px;margin-top:8px;}
+.ms-row label{font-size:12px;color:var(--tm);white-space:nowrap;}
+.ms-row input[type=range]{flex:1;accent-color:var(--blue);}
+.ms-val{font-size:12px;font-weight:500;color:var(--blue);min-width:40px;text-align:right;}
+.ms-note{font-size:12px;color:var(--ts);margin-top:6px;line-height:1.6;}
+.flow{display:flex;gap:4px;align-items:center;flex-wrap:wrap;margin-top:10px;padding-top:10px;border-top:0.5px solid var(--rule);}
+.fs{font-size:11px;padding:3px 9px;border-radius:3px;background:var(--cream);border:0.5px solid var(--rule2);color:var(--ts);transition:all 0.2s;white-space:nowrap;}
+.fs.on{background:var(--blue);color:var(--white);border-color:var(--blue);}
+.fs.done{background:var(--green-bg);color:var(--green);border-color:rgba(15,110,86,0.2);}
+.fa{font-size:12px;color:var(--tm);}
+
+/* ── INSIGHT ── */
+.insight{background:var(--navy);border-radius:6px;padding:1.25rem 1.3rem;}
+.ins-ey{font-size:11px;color:rgba(255,255,255,0.35);text-transform:uppercase;letter-spacing:0.09em;margin-bottom:6px;}
+.ins-q{font-family:var(--serif);font-size:16px;color:rgba(255,255,255,0.95);margin-bottom:7px;line-height:1.3;}
+.ins-a{font-size:14px;color:rgba(255,255,255,0.6);line-height:1.75;}
+.ins-a strong{color:rgba(255,255,255,0.9);font-weight:500;}
+
+/* ── OVERLAYS ── */
+.overlay{display:none;position:fixed;inset:0;z-index:100;background:rgba(13,27,42,0.45);backdrop-filter:blur(2px);}
+.overlay.open{display:flex;align-items:flex-end;}
+.panel{background:var(--white);width:100%;border-radius:14px 14px 0 0;padding:1.75rem 1.5rem 2rem;max-height:90vh;overflow-y:auto;animation:su 0.25s ease;}
+@keyframes su{from{transform:translateY(40px);opacity:0;}to{transform:translateY(0);opacity:1;}}
+@keyframes fadeup{from{opacity:0;transform:translateY(10px);}to{opacity:1;transform:translateY(0);}}
+@keyframes fadein{from{opacity:0;}to{opacity:1;}}
+@keyframes line{from{width:0;}to{width:48px;}}
+.panel-head{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:1.5rem;}
+.panel-title{font-family:var(--serif);font-size:22px;color:var(--navy);}
+.panel-sub{font-size:13px;color:var(--tm);margin-top:3px;}
+.panel-x{background:none;border:0.5px solid var(--rule2);border-radius:5px;cursor:pointer;color:var(--tm);width:32px;height:32px;display:flex;align-items:center;justify-content:center;font-size:16px;transition:all 0.15s;flex-shrink:0;}
+.panel-x:hover{border-color:var(--blue);color:var(--blue);}
+.fg{margin-bottom:0.875rem;}
+.fl{font-size:11px;color:var(--ts);display:block;margin-bottom:4px;text-transform:uppercase;letter-spacing:0.06em;}
+.fi{width:100%;padding:9px 11px;font-size:13px;border:0.5px solid var(--rule2);border-radius:5px;background:var(--white);color:var(--tp);font-family:var(--sans);transition:border-color 0.15s;}
+.fi:focus{outline:none;border-color:var(--blue);}
+.fr2{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+.svc-g{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-top:4px;}
+.svc{padding:8px 10px;border:0.5px solid var(--rule2);border-radius:5px;font-size:13px;color:var(--ts);cursor:pointer;text-align:center;transition:all 0.15s;font-family:var(--sans);background:var(--white);}
+.svc:hover,.svc.on{background:var(--blue);color:var(--white);border-color:var(--blue);}
+.fp-note{font-size:12px;color:var(--tm);margin-top:5px;line-height:1.6;}
+.fp-submit{width:100%;padding:11px;font-size:13px;font-weight:500;background:var(--blue);color:var(--white);border:none;border-radius:5px;cursor:pointer;margin-top:1rem;font-family:var(--sans);transition:background 0.15s;}
+.fp-submit:hover{background:var(--blue-dark);}
+.rp-cards{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:1.25rem;}
+.rp-card{background:var(--cream);border-radius:5px;padding:0.875rem 1rem;}
+.rp-label{font-size:11px;color:var(--tm);text-transform:uppercase;letter-spacing:0.06em;margin-bottom:4px;}
+.rp-val{font-size:13px;color:var(--tp);line-height:1.55;}
+.rp-dl{display:flex;align-items:center;justify-content:center;gap:7px;width:100%;padding:11px;font-size:13px;font-weight:500;background:var(--blue);color:var(--white);border:none;border-radius:5px;cursor:pointer;font-family:var(--sans);transition:background 0.15s;}
+.rp-dl:hover{background:var(--blue-dark);}
+
+/* ── RESPONSIVE ── */
+@media(max-width:600px){
+  .hero{padding:2rem 0 1.75rem;}
+  .hero-hl{font-size:24px;}
+  .wi{padding:1.25rem 1.1rem;}
+  .wi-title{font-size:17px;}
+  .wi-body{font-size:15px;}
+  .fr2{grid-template-columns:1fr;}
+  .rp-cards{grid-column:1fr;}
+  .cnt-row{gap:6px;}
+  .cnt-n{font-size:17px;}
+  .panel{padding:1.5rem 1.25rem 1.75rem;}
+  .cats{padding:1.5rem 0 2.5rem;}
+  .avatar{width:58px;height:58px;font-size:17px;}
+}
+@media(max-width:400px){
+  .av-links{gap:10px;}
+  .hlink{font-size:11px;}
+  .flow{gap:3px;}
+  .fs{font-size:9px;padding:2px 6px;}
+  .avatar{width:52px;height:52px;font-size:15px;}
+}
+@media(min-width:900px){
+  .wrap{padding:0 2rem;}
+  .hero{padding:4rem 0 3rem;}
+}
+</style>
+</head>
+<body>
+
+<!-- <img src="image.png" alt="" style="position:fixed;inset:0;width:100%;height:100%;object-fit:cover;object-position:center bottom;opacity: 0.82 ;pointer-events:none;z-index:0;"/> -->
+
+<div class="wrap">
+
+<!-- ── HERO ── -->
+<section class="hero">
+  <div class="av-row">
+    <div class="avatar">
+      <img src="profile.png" alt="Arvil Raj"/>
+    </div>
+    <div class="av-info">
+      <p class="av-name">Arvil Raj</p>
+      <p class="av-role">Product Engineer · Full Stack</p>
+      <div class="av-links">
+        <a class="hlink" href="mailto:arvilraj904@gmail.com">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m2 7 10 7 10-7"/></svg>Email
+        </a>
+        <a class="hlink" href="https://github.com/arvilraj" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.477 2 12c0 4.42 2.865 8.166 6.839 9.489.5.092.682-.217.682-.482 0-.237-.008-.866-.013-1.7-2.782.603-3.369-1.342-3.369-1.342-.454-1.155-1.11-1.462-1.11-1.462-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.087 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.268 2.75 1.026A9.578 9.578 0 0 1 12 6.836c.85.004 1.705.114 2.504.336 1.909-1.294 2.747-1.026 2.747-1.026.546 1.377.202 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.743 0 .267.18.578.688.48C19.138 20.163 22 16.418 22 12c0-5.523-4.477-10-10-10z"/></svg>GitHub
+        </a>
+        <a class="hlink" href="https://linkedin.com/in/arvil-raj-94995623a" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>LinkedIn
+        </a>
+        <a class="hlink" href="https://leetcode.com/u/Arvil_raj" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M13.483 0a1.374 1.374 0 0 0-.961.438L7.116 6.226l-3.854 4.126a5.266 5.266 0 0 0-1.209 2.104 5.35 5.35 0 0 0-.125.513 5.527 5.527 0 0 0 .062 2.362 5.83 5.83 0 0 0 .349 1.017 5.938 5.938 0 0 0 1.271 1.818l4.277 4.193.039.038c2.248 2.165 5.852 2.133 8.063-.074l2.396-2.392c.54-.54.54-1.414.003-1.955a1.378 1.378 0 0 0-1.951-.003l-2.396 2.392a3.021 3.021 0 0 1-4.205.038l-.02-.019-4.276-4.193c-.652-.64-.972-1.469-.948-2.263a2.68 2.68 0 0 1 .066-.523 2.545 2.545 0 0 1 .619-1.164L9.13 8.114c1.058-1.134 3.204-1.27 4.43-.278l3.501 2.831c.593.48 1.461.387 1.94-.207a1.384 1.384 0 0 0-.207-1.943l-3.5-2.831c-.8-.647-1.766-1.045-2.774-1.202l2.015-2.158A1.384 1.384 0 0 0 13.483 0zm-2.866 12.815a1.38 1.38 0 0 0-1.38 1.382 1.38 1.38 0 0 0 1.38 1.382H20.79a1.38 1.38 0 0 0 1.38-1.382 1.38 1.38 0 0 0-1.38-1.382z"/></svg>LeetCode
+        </a>
+        <button class="hlink" onclick="openResume()">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14,2 14,8 20,8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><line x1="10" y1="9" x2="8" y2="9"/></svg>Resume
+        </button>
+      </div>
+    </div>
+  </div>
+  <h1 class="hero-hl">I don't just write code.<br><em>I decide what to build and why.</em></h1>
+  <p class="hero-body">Architecture, security, payments, admin systems, ads. I own the whole product, not just a slice. Below is how I actually think, organised by the type of problem, not the technology used.</p>
+  <button class="wm-btn" onclick="openForm()">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22,2 15,22 11,13 2,9"/></svg>
+    Work with me
+  </button>
+</section>
+
+<!-- ── CATEGORIES ── -->
+<div class="cats">
+
+  <!-- Engineering -->
+  <div class="cat" id="c1">
+    <div class="cat-hd" onclick="tog('c1')">
+      
+      <div class="cat-info">
+        <p class="cat-title">Engineering & Architecture</p>
+        <p class="cat-desc">Systems built from scratch. Full ownership from database to deployment.</p>
+      </div>
+      <svg class="cat-arr" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9,18 15,12 9,6"/></svg>
+    </div>
+    <div class="cat-body">
+
+      <div class="wi">
+        <p class="wi-ey">Freelance · Live · Solo build</p>
+        <p class="wi-title">Ridiviaanh - a booking platform that runs without me</p>
+        <p class="wi-body">Trek bookings, meal planning, dynamic slot availability, group pricing, Razorpay payments, partner inquiry, notify-me system. The real engineering challenge wasn't the booking flow — it was designing a <strong>zero-touch admin panel</strong> so the client never calls me after launch. I built the admin first. The customer layer came after.<br><br>10-minute slot holds prevent double-bookings during payment. Two people trying to book the same slot at the same time — that's a concurrency problem. The hold is visible to the user, not just stored in the database. Security designed in from day one: <strong>honeypot → reCAPTCHA v3 → rate limiting → input validation</strong>. Each layer with a reason, not a checklist. 10–12 days of architecture planning before a single line of code.</p>
+        <img src="ridiviaanh-architecture.png" alt="Ridiviaanh system architecture" loading="lazy" style="width:100%;border-radius:6px;margin-bottom:14px;border:0.5px solid rgba(13,27,42,0.12);"/>
+        <img src="ridiviaanh-workflow.png" alt="Booking workflow" loading="lazy" style="width:60%;display:block;margin:0 auto 14px;border-radius:6px;border:0.5px solid rgba(13,27,42,0.12);"/>
+        <img src="admin_panel.png" alt="Ridiviaanh admin panel" loading="lazy" style="width:100%;border-radius:6px;margin-bottom:14px;border:0.5px solid rgba(13,27,42,0.12);"/>
+        <div class="wi-tags">
+          <span class="tag live">Live · ridiviaanh.com</span>
+          <span class="tag">Node.js</span><span class="tag">MySQL</span>
+          <span class="tag">Razorpay</span><span class="tag">Cloudflare</span>
+          <span class="tag">Vanilla JS admin</span><span class="tag">Nodemailer</span>
+        </div>
+        <p class="wi-result">↳ 13 confirmed bookings · Zero developer dependency · Expanding with partner portal + hotels</p>
+      </div>
+
+      <div class="wi">
+        <p class="wi-ey">Production · COMCON · Performance</p>
+        <p class="wi-title">Teaching a system to ignore panic</p>
+        <div class="qv">
+          <p class="qv-ey">See it — without vs with the 300ms filter</p>
+          <div class="cnt-row">
+            <div class="cnt"><div class="cnt-n r" id="ct">0</div><div class="cnt-l">Events fired</div></div>
+            <div class="cnt"><div class="cnt-n g" id="cp">0</div><div class="cnt-l">Processed</div></div>
+            <div class="cnt"><div class="cnt-n b" id="cs">0%</div><div class="cnt-l">Noise cut</div></div>
+          </div>
+          <div class="ev-row" id="er"></div>
+          <div class="qv-status idle" id="qs">Press simulate — watch what happens without a queue</div>
+          <div class="q-controls">
+            <button class="qbtn p" id="bf" onclick="flood()">Simulate flood</button>
+            <button class="qbtn" id="bq" onclick="withQueue()" disabled>Add 300ms filter</button>
+            <button class="qbtn" onclick="qReset()">Reset</button>
+          </div>
+          <div class="ms-row">
+            <label for="msr">Timeout window</label>
+            <input type="range" id="msr" min="50" max="600" step="50" value="300" oninput="updMs(this.value)"/>
+            <span class="ms-val" id="msv">300ms</span>
+          </div>
+          <p class="ms-note" id="msn">300ms — the human perception window. Fast enough to feel instant. Long enough to absorb natural scroll bursts.</p>
+          <div class="flow">
+            <div class="fs" id="f0">Incoming</div><span class="fa">→</span>
+            <div class="fs" id="f1">Queue</div><span class="fa">→</span>
+            <div class="fs" id="f2">300ms wait</div><span class="fa">→</span>
+            <div class="fs" id="f3">Last state</div><span class="fa">→</span>
+            <div class="fs" id="f4">Smooth UI</div>
+          </div>
+        </div>
+        <div class="insight">
+          <p class="ins-ey">Why 300ms — not 500, not 100</p>
+          <p class="ins-q">"Who decides which event is the right one?"</p>
+          <p class="ins-a">At 500ms, users feel the lag. At 100ms, fast scroll bursts still slip through. <strong>300ms is the sweet spot.</strong> Events from a natural scroll arrive within 300ms of each other. Silence after that means the gesture is done. Not a technical number — a human one. Result: 80% of excessive events eliminated. Scroll stays smooth.</p>
+        </div>
+        <div class="wi-tags" style="margin-top:12px;">
+          <span class="tag">Java</span>
+          <span class="tag">Queue optimization</span><span class="tag">Debounce logic</span>
+        </div>
+        <p class="wi-result">↳ 10% speed boost · 15% overall performance improvement · Measured in production</p>
+      </div>
+
+      <div class="wi">
+        <p class="wi-ey">Production · COMCON · Performance</p>
+        <p class="wi-title">Faster, leaner, searchable — without breaking what's live</p>
+        <p class="wi-body">The constraint was real: don't change the structure, don't break what's deployed. Migrated to Cloudflare for edge caching. Reduced third-party dependency and improved load time without a rebuild. Cleaned the codebase, fixed backend form handling, and updated all content for SEO. Added structured metadata for search and AI crawler readability. Validated with Lighthouse. <strong>The discipline here wasn't building — it was improving without the luxury of starting over.</strong></p>
+        <div class="wi-tags">
+          <span class="tag">Cloudflare</span><span class="tag">SEO</span>
+          <span class="tag">Lighthouse</span><span class="tag">Performance optimization</span>
+          <span class="tag">Structured data</span><span class="tag">Code cleanup</span>
+        </div>
+        <p class="wi-result">↳ Faster load · Reduced third-party calls · SEO-ready and AI-indexed</p>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Growth -->
+  <div class="cat" id="c2">
+    <div class="cat-hd" onclick="tog('c2')">
+      
+      <div class="cat-info">
+        <p class="cat-title">Growth & Business Systems</p>
+        <p class="cat-desc">Where engineering meets revenue. Ads, SEO, analytics, B2B strategy.</p>
+      </div>
+      <svg class="cat-arr" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9,18 15,12 9,6"/></svg>
+    </div>
+    <div class="cat-body">
+      <div class="wi">
+        <p class="wi-ey">Ongoing · COMCON & Freelance</p>
+        <p class="wi-title">The layer most engineers hand off</p>
+        <p class="wi-body">Running performance marketing alongside product development. Meta Ads, Instagram Ads, Google Ads, SEO, analytics, conversion tracking, domain operations. I handle the full loop: <strong>build the product, understand the user, run the campaign, measure what breaks.</strong><br><br>Most engineers can't explain what they built to a non-technical person. Most marketers can't understand why the system works the way it does. I sit between both. That's where the interesting problems are.<br><br>Implemented full technical SEO across three live websites: Search Console setup, GA4 analytics, Lighthouse performance audits, sitemap indexing, and image optimisation.</p>
+        <div class="wi-tags">
+          <span class="tag">Meta Ads</span><span class="tag">Instagram Ads</span><span class="tag">Google Ads</span>
+          <span class="tag">SEO</span><span class="tag">GA4</span><span class="tag">Search Console</span><span class="tag">Lighthouse</span><span class="tag">Domain ops</span>
+        </div>
+        <p class="wi-result">↳ Full loop ownership: product → user → campaign → measurement</p>
+      </div>
+      <div class="wi">
+        <p class="wi-ey">Production · COMCON · B2B</p>
+        <p class="wi-title">Why I didn't automate the B2B order workflow</p>
+        <p class="wi-body">High-value B2B orders don't work like checkout buttons. Third-party gateways charge a percentage per transaction with no ceiling — on large orders, that's a significant cut for nothing in return. Built a dynamic QR code and UPI ID system instead. No gateway fee. No third-party dependency.<br><br>Customer gets an automatic payment confirmation. Order confirmation is cross-verified by admin before anything moves. At this order value, a human in the loop isn't a weakness — every order involves negotiation, not just payment.<br><br>At current order volumes, manual verification adds value. Automation makes sense when volume outgrows the relationship. Right now it doesn't. Deliberate restraint is harder than adding features.</p>
+        <div class="wi-tags">
+          <span class="tag">B2B strategy</span><span class="tag">Dynamic QR</span>
+          <span class="tag">In-house UPI</span><span class="tag">Admin panel</span>
+          <span class="tag">Manual verification</span>
+        </div>
+        <p class="wi-result">↳ Dynamic QR + UPI system built · Admin cross-verification in place · Zero gateway fees</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Communication -->
+  <div class="cat" id="c3">
+    <div class="cat-hd" onclick="tog('c3')">
+      
+      <div class="cat-info">
+        <p class="cat-title">Communication & Consulting</p>
+        <p class="cat-desc">Smaller work. Bigger impact. Systems are useless if humans can't operate them.</p>
+      </div>
+      <svg class="cat-arr" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9,18 15,12 9,6"/></svg>
+    </div>
+    <div class="cat-body">
+      <div class="wi">
+        <p class="wi-ey">National broadcaster · 60+ engineers · COMCON</p>
+        <p class="wi-title">Doordarshan — 40% fewer support queries, same software</p>
+        <p class="wi-body">Trained 60+ broadcast engineers over 2 days on installation, troubleshooting, and application workflow. Then redesigned documentation and training videos around how engineers actually think — not how the product works.<br><br><strong>40% reduction in support queries. Not from better software. From clearer communication.</strong> That's a product insight I carry into every system I build now.</p>
+        <div class="wi-tags">
+          <span class="tag blue">60+ engineers</span><span class="tag">2-day training</span>
+          <span class="tag">Documentation redesign</span><span class="tag">Workflow videos</span>
+        </div>
+        <p class="wi-result">↳ 40% support query reduction · National broadcaster · Delivered solo</p>
+      </div>
+      <div class="wi">
+        <p class="wi-ey">Consulting · EdTech architecture</p>
+        <p class="wi-title">Architecture guidance for a quiz-based education platform</p>
+        <p class="wi-body">Consulted on database structure for questions, users, attempts, results, and progress tracking. Admin panel design, student dashboard logic, scaling for high student volume, low-cost MVP setup. Practical guidance an intern team could execute without a senior architect on call.</p>
+        <div class="wi-tags">
+          <span class="tag">EdTech</span><span class="tag">DB design</span>
+          <span class="tag">MVP scoping</span><span class="tag">Architecture consulting</span>
+        </div>
+        <p class="wi-result">↳ Technical clarity for non-technical decision-makers</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Thinking -->
+  <div class="cat" id="c4">
+    <div class="cat-hd" onclick="tog('c4')">
+      
+      <div class="cat-info">
+        <p class="cat-title">How I think</p>
+        <p class="cat-desc">The decisions behind the work. Architecture is judgment, not just execution.</p>
+      </div>
+      <svg class="cat-arr" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9,18 15,12 9,6"/></svg>
+    </div>
+    <div class="cat-body">
+      <div class="wi">
+        <p class="wi-ey">Decision 01</p>
+        <p class="wi-title">Why I built the admin panel before the customer-facing features</p>
+        <p class="wi-body">If the client can't manage their own content, they're dependent on me forever. The admin panel is the real product. The customer layer is just what's visible. I design operational independence before I design the experience.</p>
+      </div>
+      <div class="wi">
+        <p class="wi-ey">Decision 02</p>
+        <p class="wi-title">Why 10–12 days of planning before writing a line of code</p>
+        <p class="wi-body">First time owning a system end to end. I thought through failure modes, concurrency, load, and what would break at scale. Not because I expected 5 lakh users immediately — because I didn't want the architecture to collapse if they came. Thinking before building is the discipline most people skip.</p>
+      </div>
+      <div class="wi">
+        <p class="wi-ey">Decision 03</p>
+        <p class="wi-title">On using AI as a partner, not a replacement</p>
+        <p class="wi-body">I use AI to go faster through what I already understand — debugging, finding patterns, exploring tradeoffs. The architectural decisions are mine. The question of what to build and why is always mine. AI helps me unlock parts I'd otherwise slow down on. That's the only honest way to describe it.</p>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /cats -->
+</div><!-- /wrap -->
+
+<!-- ── FORM OVERLAY ── -->
+<div class="overlay" id="fov" onclick="closeFov(event)">
+  <div class="panel">
+    <div class="panel-head">
+      <div><p class="panel-title">Let's work together</p><p class="panel-sub">Tell me what you're building. I'll reply within 2 days if I'm available.</p></div>
+      <button class="panel-x" onclick="closeO('fov')">✕</button>
+    </div>
+    <div class="fg">
+      <label class="fl">What are you looking for?</label>
+      <div class="svc-g">
+        <div class="svc" onclick="this.classList.toggle('on')">Build a product</div>
+        <div class="svc" onclick="this.classList.toggle('on')">Redesign / fix</div>
+        <div class="svc" onclick="this.classList.toggle('on')">Consult / advise</div>
+        <div class="svc" onclick="this.classList.toggle('on')">Marketing & ads</div>
+      </div>
+    </div>
+    <div class="fr2">
+      <div class="fg"><label class="fl">Your name</label><input class="fi" type="text" placeholder="Name" id="f-name"/></div>
+      <div class="fg"><label class="fl">Email</label><input class="fi" type="email" placeholder="you@company.com" id="f-email"/></div>
+    </div>
+    <div class="fg"><label class="fl">Website (if any)</label><input class="fi" type="text" placeholder="yoursite.com" id="f-site"/></div>
+    <div class="fg"><label class="fl">What are you trying to build?</label><textarea class="fi" rows="3" placeholder="The problem, the idea, or what's broken..." id="f-msg"></textarea></div>
+    <div class="fr2">
+      <div class="fg">
+        <label class="fl">Budget</label>
+        <select class="fi" id="f-budget">
+          <option value="">Select range</option>
+          <option>Under ₹15k</option><option>₹15k – ₹50k</option>
+          <option>₹50k – ₹1.5L</option><option>₹1.5L+</option>
+          <option>Let's discuss</option>
+        </select>
+      </div>
+      <div class="fg"><label class="fl">Reference / inspiration</label><input class="fi" type="text" placeholder="Link or describe" id="f-ref"/></div>
+    </div>
+    <p class="fp-note">I read every message personally. No auto-replies.</p>
+    <!-- Wire this to your Cloudflare Worker endpoint when ready -->
+    <button class="fp-submit" onclick="submitForm()">Send it →</button>
+  </div>
+</div>
+
+<!-- ── RESUME OVERLAY ── -->
+<div class="overlay" id="rov" onclick="closeRov(event)">
+  <div class="panel">
+    <div class="panel-head">
+      <div><p class="panel-title">Resume</p><p class="panel-sub">Product Engineer</p></div>
+      <button class="panel-x" onclick="closeO('rov')">✕</button>
+    </div>
+    <div class="rp-cards">
+      <div class="rp-card"><div class="rp-label">Currently</div><div class="rp-val">Product Engineer · COMCON Software Solutions, Delhi</div></div>
+      <div class="rp-card"><div class="rp-label">Experience</div><div class="rp-val">Since Dec 2024 · Full stack · Marketing</div></div>
+      <div class="rp-card"><div class="rp-label">Education</div><div class="rp-val">MCA · Amity University · 8.1 CGPA</div></div>
+      <div class="rp-card"><div class="rp-label">Certification</div><div class="rp-val">Azure AI Fundamentals · Microsoft · Jun 2025</div></div>
+      <div class="rp-card" style="grid-column:1/-1;"><div class="rp-label">Stack</div><div class="rp-val">Node.js · Java · JavaScript · MySQL · Cloudflare · Razorpay · Lighthouse · Figma</div></div>
+    </div>
+    <!-- Update path to your actual PDF -->
+    <button class="rp-dl" onclick="window.open('resume_april_2026.pdf', '_blank')">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7,10 12,15 17,10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+      Download PDF
+    </button>
+  </div>
+</div>
+
+<script>
+// ── Accordion ──
+function tog(id){
+  const el=document.getElementById(id);
+  const was=el.classList.contains('open');
+  document.querySelectorAll('.cat').forEach(c=>c.classList.remove('open'));
+  if(!was)el.classList.add('open');
+}
+
+// ── Overlays ──
+function openForm(){document.getElementById('fov').classList.add('open');document.body.style.overflow='hidden';}
+function openResume(){document.getElementById('rov').classList.add('open');document.body.style.overflow='hidden';}
+function closeO(id){document.getElementById(id).classList.remove('open');document.body.style.overflow='';}
+function closeFov(e){if(e.target.id==='fov')closeO('fov');}
+function closeRov(e){if(e.target.id==='rov')closeO('rov');}
+
+// ── Debounce Demo ──
+let _ms = 300;
+
+function updMs(v) {
+  _ms = parseInt(v);
+  document.getElementById('msv').textContent = v + 'ms';
+  const notes = {
+    50:'50ms — too tight. Burst events still flood through on fast scrolls.',
+    100:'100ms — better, but fast scroll bursts still slip through.',
+    150:'150ms — getting closer. Some noise still sneaks in.',
+    200:'200ms — reasonable. Slight lag may appear on quick gestures.',
+    250:'250ms — close to the human perception window.',
+    300:'300ms — the human perception window. Fast enough to feel instant. Long enough to absorb natural scroll bursts.',
+    350:'350ms — starting to feel sluggish on fast interactions.',
+    400:'400ms — noticeable lag. Users begin to feel the delay.',
+    450:'450ms — sluggish. UX starts to degrade.',
+    500:'500ms — users feel the lag. Too slow for smooth UI.',
+    550:'550ms — half a second. That\'s too long.',
+    600:'600ms — way too slow. The UI feels broken.'
+  };
+  document.getElementById('msn').textContent = notes[v] || v + 'ms window.';
+}
+
+function _flow(step) {
+  ['f0','f1','f2','f3','f4'].forEach((id,i) => {
+    const el = document.getElementById(id);
+    if (step === -1) { el.className='fs'; return; }
+    el.className = i < step ? 'fs done' : i === step ? 'fs on' : 'fs';
+  });
+}
+
+function flood() {
+  const total = 18;
+  const er = document.getElementById('er');
+  const qs = document.getElementById('qs');
+  document.getElementById('bf').disabled = true;
+  document.getElementById('bq').disabled = true;
+  er.innerHTML = '';
+  document.getElementById('ct').textContent = '0';
+  document.getElementById('cp').textContent = '0';
+  document.getElementById('cs').textContent = '0%';
+  qs.className = 'qv-status idle';
+  qs.textContent = 'Flooding...';
+  _flow(0);
+  let n = 0;
+  const iv = setInterval(() => {
+    n++;
+    const ev = document.createElement('div');
+    // First and last = green (processed), middle = red (noise)
+    if (n === 1 || n === total) {
+      ev.className = 'ev ok';
+    } else {
+      ev.className = 'ev hot';
+    }
+    ev.textContent = n;
+    er.appendChild(ev);
+    document.getElementById('ct').textContent = n;
+    document.getElementById('cp').textContent = n === 1 ? '1' : n === total ? '2' : document.getElementById('cp').textContent;
+    if (n === 2) _flow(1);
+    if (n === total) {
+      clearInterval(iv);
+      _flow(4);
+      document.getElementById('cp').textContent = '2';
+      document.getElementById('cs').textContent = '0%';
+      qs.className = 'qv-status bad';
+      qs.textContent = 'First processed. Last processed. ' + (total - 2) + ' events in between — pure noise. System never knew when you were done.';
+      document.getElementById('bf').disabled = false;
+      document.getElementById('bq').disabled = false;
+    }
+  }, 75);
+}
+
+function withQueue() {
+  const total = 18;
+  const b1 = 9;
+  const er = document.getElementById('er');
+  const qs = document.getElementById('qs');
+  document.getElementById('bf').disabled = true;
+  document.getElementById('bq').disabled = true;
+  er.innerHTML = '';
+  document.getElementById('ct').textContent = '0';
+  document.getElementById('cp').textContent = '0';
+  document.getElementById('cs').textContent = '0%';
+  qs.className = 'qv-status idle';
+  qs.textContent = 'Events incoming...';
+  _flow(0);
+  let n = 0;
+
+  // ── BURST 1 ──
+  const iv1 = setInterval(() => {
+    n++;
+    const ev = document.createElement('div');
+    ev.className = 'ev hot';
+    ev.textContent = n;
+    er.appendChild(ev);
+    document.getElementById('ct').textContent = n;
+    if (n === 2) _flow(1);
+    if (n >= b1) {
+      clearInterval(iv1);
+      _flow(2);
+      qs.className = 'qv-status idle';
+      qs.textContent = 'User stopped. Waiting ' + _ms + 'ms...';
+
+      setTimeout(() => {
+        // dim burst 1 except last
+        er.querySelectorAll('.ev').forEach((box, i) => {
+          box.className = i < b1 - 1 ? 'ev dim' : 'ev ok';
+        });
+        _flow(3);
+        document.getElementById('cp').textContent = '1';
+        qs.className = 'qv-status good';
+        qs.textContent = 'Pause detected. Last state captured.';
+
+        // ── GAP + BURST 2 ──
+        setTimeout(() => {
+          _flow(1);
+          qs.className = 'qv-status idle';
+          qs.textContent = 'User scrolls again...';
+          let n2 = 0;
+          const iv2 = setInterval(() => {
+            n2++; n++;
+            const ev2 = document.createElement('div');
+            ev2.className = 'ev hot';
+            ev2.textContent = n;
+            er.appendChild(ev2);
+            document.getElementById('ct').textContent = n;
+            if (n2 >= total - b1) {
+              clearInterval(iv2);
+              _flow(2);
+              qs.className = 'qv-status idle';
+              qs.textContent = 'Stopped again. Waiting ' + _ms + 'ms...';
+
+              setTimeout(() => {
+                // dim burst 2 except last
+                er.querySelectorAll('.ev.hot').forEach((box, i, arr) => {
+                  box.className = i < arr.length - 1 ? 'ev dim' : 'ev ok';
+                });
+                _flow(3);
+                document.getElementById('cp').textContent = '2';
+                const pct = Math.round(((total - 2) / total) * 100);
+                document.getElementById('cs').textContent = pct + '%';
+                setTimeout(() => {
+                  _flow(4);
+                  qs.className = 'qv-status good';
+                  qs.textContent = '2 pauses. 2 states captured. ' + pct + '% of events filtered out.';
+                  document.getElementById('bf').disabled = false;
+                }, 400);
+              }, Math.min(_ms, 700));
+            }
+          }, 70);
+        }, 700);
+      }, Math.min(_ms, 700));
+    }
+  }, 70);
+}
+
+function qReset() {
+  document.getElementById('er').innerHTML = '';
+  document.getElementById('ct').textContent = '0';
+  document.getElementById('cp').textContent = '0';
+  document.getElementById('cs').textContent = '0%';
+  const qs = document.getElementById('qs');
+  qs.className = 'qv-status idle';
+  qs.textContent = 'Press simulate — watch what happens without a queue';
+  document.getElementById('bf').disabled = false;
+  document.getElementById('bq').disabled = true;
+  _flow(-1);
+}
+
+//  Form submit
+async function submitForm(){
+  const btn=document.querySelector('.fp-submit');
+  btn.textContent='Sending...';btn.disabled=true;
+  const firstName=(document.getElementById('f-name').value.trim().split(' ')[0])||'there';
+  const data={
+    name:document.getElementById('f-name').value,
+    email:document.getElementById('f-email').value,
+    site:document.getElementById('f-site').value,
+    message:document.getElementById('f-msg').value,
+    budget:document.getElementById('f-budget').value,
+    ref:document.getElementById('f-ref').value
+  };
+  try{
+    const res=await fetch('https://portfolio-form.arvilraj904.workers.dev',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(data)});
+    if(res.ok){
+  const panel=document.querySelector('#fov .panel');
+  const original=panel.innerHTML;
+  panel.innerHTML=`
+    <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:320px;text-align:center;padding:2.5rem 2rem;">
+      <p style="font-family:var(--serif);font-size:26px;color:var(--navy);margin:0 0 14px;opacity:0;animation:fadeup 0.4s ease 0.1s forwards;">Got it, ${firstName}.</p>
+      <p style="font-size:15px;color:var(--ts);line-height:1.65;max-width:280px;margin:0 0 16px;opacity:0;animation:fadein 0.4s ease 0.6s forwards;">I'll read this properly and reply within 2 days if it's a fit.</p>
+      <p style="font-family:var(--serif);font-style:italic;font-size:14px;color:var(--tm);opacity:0;animation:fadein 0.4s ease 0.85s forwards;"> - Arvil</p>
+    </div>`;
+  setTimeout(()=>{
+    closeO('fov');
+    setTimeout(()=>{ panel.innerHTML=original; },300);
+  },3500);
+    } else throw new Error();
+  }catch{
+    btn.textContent='Send it →';btn.disabled=false;
+    alert('Something went wrong. Email me directly: arvilraj904@gmail.com');
+  }
+}
+
+</script>
+</body>
+</html>
