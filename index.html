@@ -34,13 +34,7 @@ body::before{
   z-index:0;
   -webkit-transform:translateZ(0);
   transform:translateZ(0);
-}
-@media(max-width:768px){
-  body::before{
-    position:absolute;
-    width:100%;
-    min-height:100%;
-  }
+  will-change:transform;
 }
 
 /* ── LAYOUT ── */
