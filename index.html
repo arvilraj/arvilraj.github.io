@@ -45,15 +45,15 @@ body::before{
 .av-row{display:flex;align-items:center;gap:14px;margin-bottom:1.75rem;}
 .avatar{width:68px;height:68px;border-radius:50%;background:var(--blue-light);border:2px solid var(--blue);display:flex;align-items:center;justify-content:center;font-family:var(--serif);font-size:20px;color:var(--blue-dark);flex-shrink:0;overflow:hidden;}
 .avatar img{width:100%;height:100%;object-fit:cover;border-radius:50%;}
-.av-name{font-size:18px;font-weight:500;color:var(--tp);letter-spacing:-0.01em;text-shadow:0 0 10px rgba(255,255,255,0.95);}
-.av-role{font-size:13px;color:var(--tp);margin-top:3px;text-shadow:0 0 8px rgba(255,255,255,0.95);}
+.av-name{font-size:18px;font-weight:500;color:var(--tp);letter-spacing:-0.01em;}
+.av-role{font-size:13px;color:var(--tp);margin-top:3px;}
 .av-links{display:flex;gap:14px;margin-top:8px;flex-wrap:wrap;}
-.hlink{font-size:12px;color:var(--tp);display:flex;align-items:center;gap:4px;text-decoration:none;transition:color 0.15s;cursor:pointer;letter-spacing:0.01em;background:none;border:none;font-family:var(--sans);text-shadow:0 0 8px rgba(255,255,255,0.95);}
+.hlink{font-size:12px;color:var(--tp);display:flex;align-items:center;gap:4px;text-decoration:none;transition:color 0.15s;cursor:pointer;letter-spacing:0.01em;background:none;border:none;font-family:var(--sans);}
 .hlink:hover{color:var(--blue);}
 .hlink svg{width:14px;height:14px;flex-shrink:0;}
-.hero-hl{font-family:var(--serif);font-size:clamp(24px,5vw,32px);line-height:1.2;color:var(--navy);margin-bottom:1rem;letter-spacing:-0.02em;text-shadow:0 0 14px rgba(255,255,255,0.98),0 0 30px rgba(255,255,255,0.7);}
+.hero-hl{font-family:var(--serif);font-size:clamp(24px,5vw,32px);line-height:1.2;color:var(--navy);margin-bottom:1rem;letter-spacing:-0.02em;}
 .hero-hl em{font-style:italic;color:var(--tp);}
-.hero-body{font-size:16px;color:var(--tp);line-height:1.75;max-width:520px;margin-bottom:1.75rem;text-shadow:0 0 10px rgba(255,255,255,0.95),0 0 22px rgba(255,255,255,0.6);}
+.hero-body{font-size:16px;color:var(--tp);line-height:1.75;max-width:520px;margin-bottom:1.75rem;}
 .wm-btn{display:inline-flex;align-items:center;gap:7px;font-size:13px;font-weight:500;color:var(--white);background:var(--blue);padding:10px 20px;border-radius:5px;border:none;cursor:pointer;font-family:var(--sans);transition:background 0.15s;letter-spacing:0.01em;}
 .wm-btn:hover{background:var(--blue-dark);}
 .wm-btn svg{width:15px;height:15px;}
@@ -267,15 +267,16 @@ body::before{
       <div class="wi">
         <p class="wi-ey">Production · COMCON · Performance</p>
         <p class="wi-title">Teaching a system to ignore panic</p>
+        <p class="wi-body">Some inputs arrive faster than a system can process them. When a user interacts faster than the event queue can clear, every signal stacks up. The JS layer receives each one and tries to act — the result is freezing, lag, or the UI locking entirely. The fix wasn't to slow the input down. It was to teach the JS layer which signals actually matter.</p>
         <div class="qv">
-          <p class="qv-ey">See it — without vs with the 300ms filter</p>
+          <p class="qv-ey">See it without vs with the 300ms filter</p>
           <div class="cnt-row">
             <div class="cnt"><div class="cnt-n r" id="ct">0</div><div class="cnt-l">Events fired</div></div>
             <div class="cnt"><div class="cnt-n g" id="cp">0</div><div class="cnt-l">Processed</div></div>
             <div class="cnt"><div class="cnt-n b" id="cs">0%</div><div class="cnt-l">Noise cut</div></div>
           </div>
           <div class="ev-row" id="er"></div>
-          <div class="qv-status idle" id="qs">Press simulate — watch what happens without a queue</div>
+          <div class="qv-status idle" id="qs">Press simulate - watch what happens without a queue</div>
           <div class="q-controls">
             <button class="qbtn p" id="bf" onclick="flood()">Simulate flood</button>
             <button class="qbtn" id="bq" onclick="withQueue()" disabled>Add 300ms filter</button>
@@ -286,7 +287,7 @@ body::before{
             <input type="range" id="msr" min="50" max="600" step="50" value="300" oninput="updMs(this.value)"/>
             <span class="ms-val" id="msv">300ms</span>
           </div>
-          <p class="ms-note" id="msn">300ms — the human perception window. Fast enough to feel instant. Long enough to absorb natural scroll bursts.</p>
+          <p class="ms-note" id="msn">300ms - the human perception window. Fast enough to feel instant. Long enough to absorb natural interaction bursts.</p>
           <div class="flow">
             <div class="fs" id="f0">Incoming</div><span class="fa">→</span>
             <div class="fs" id="f1">Queue</div><span class="fa">→</span>
@@ -296,27 +297,29 @@ body::before{
           </div>
         </div>
         <div class="insight">
-          <p class="ins-ey">Why 300ms — not 500, not 100</p>
-          <p class="ins-q">"Who decides which event is the right one?"</p>
-          <p class="ins-a">At 500ms, users feel the lag. At 100ms, fast scroll bursts still slip through. <strong>300ms is the sweet spot.</strong> Events from a natural scroll arrive within 300ms of each other. Silence after that means the gesture is done. Not a technical number — a human one. Result: 80% of excessive events eliminated. Scroll stays smooth.</p>
+          <p class="ins-ey">Why 300ms - not 500, not 100</p>
+          <p class="ins-q">"Who decides which signal is the right one?"</p>
+          <p class="ins-a">At 500ms, users feel the lag. At 100ms, rapid button bursts still flood through. <strong>300ms is the human threshold.</strong> Signals from a natural button press cluster within 300ms of each other. Silence after that means the action is complete. Not a technical number a human one. Result: 80-88% of excessive signals filtered. UI stays responsive under any input speed.</p>
         </div>
         <div class="wi-tags" style="margin-top:12px;">
-          <span class="tag">Java</span>
-          <span class="tag">Queue optimization</span><span class="tag">Debounce logic</span>
+          <span class="tag">JavaScript</span>
+          <span class="tag">Event queue</span>
+          <span class="tag">Timeout window</span>
         </div>
-        <p class="wi-result">↳ 10% speed boost · 15% overall performance improvement · Measured in production</p>
+        <p class="wi-result">↳ UI freeze eliminated · Responsive under rapid input · 80–88% of excessive signals filtered</p>
       </div>
 
       <div class="wi">
         <p class="wi-ey">Production · COMCON · Performance</p>
-        <p class="wi-title">Faster, leaner, searchable — without breaking what's live</p>
-        <p class="wi-body">The constraint was real: don't change the structure, don't break what's deployed. Migrated to Cloudflare for edge caching. Reduced third-party dependency and improved load time without a rebuild. Cleaned the codebase, fixed backend form handling, and updated all content for SEO. Added structured metadata for search and AI crawler readability. Validated with Lighthouse. <strong>The discipline here wasn't building — it was improving without the luxury of starting over.</strong></p>
+        <p class="wi-title">Faster, leaner, searchable without breaking what's live</p>
+        <p class="wi-body">The constraint was real: don't change the structure, don't break what's deployed. Stripped Bootstrap and rewrote styles from scratch consolidating 6-7 scattered CSS files into 2: one shared file for header, footer, and common components, one dedicated per page. Replaced PHP backend logic with Cloudflare Workers. Migrated to Cloudflare for edge caching and CDN delivery. Heavy media offloaded to reduce network calls. Cleaned the codebase, fixed backend form handling, and updated all content for SEO with structured metadata for search and AI crawler readability. <strong>The discipline here wasn't building - it was improving without the luxury of starting over.</strong></p>
+        <img src="lighthouse_comparision.png" alt="Lighthouse scores before and after optimisation" loading="lazy" style="width:100%;border-radius:6px;margin-bottom:14px;border:0.5px solid rgba(13,27,42,0.12);"/>
         <div class="wi-tags">
-          <span class="tag">Cloudflare</span><span class="tag">SEO</span>
+          <span class="tag">Cloudflare Workers</span><span class="tag">CSS architecture</span>
+          <span class="tag">Bootstrap removal</span><span class="tag">SEO</span>
           <span class="tag">Lighthouse</span><span class="tag">Performance optimization</span>
-          <span class="tag">Structured data</span><span class="tag">Code cleanup</span>
         </div>
-        <p class="wi-result">↳ Faster load · Reduced third-party calls · SEO-ready and AI-indexed</p>
+        <p class="wi-result">↳ Performance 75→98 · Accessibility 72→85 · SEO 91→92 · Across 50 pages</p>
       </div>
 
     </div>
@@ -491,7 +494,10 @@ function tog(id){
   const el=document.getElementById(id);
   const was=el.classList.contains('open');
   document.querySelectorAll('.cat').forEach(c=>c.classList.remove('open'));
-  if(!was)el.classList.add('open');
+  if(!was){
+    el.classList.add('open');
+    setTimeout(()=>el.scrollIntoView({behavior:'smooth',block:'start'}),50);
+  }
 }
 
 // ── Overlays ──
