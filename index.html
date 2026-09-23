@@ -261,7 +261,23 @@ body::before{
           <span class="tag">Razorpay</span><span class="tag">Cloudflare</span>
           <span class="tag">Vanilla JS admin</span><span class="tag">Nodemailer</span>
         </div>
-        <p class="wi-result">↳ 13 confirmed bookings · Zero developer dependency · Expanding with partner portal + hotels</p>
+        <p class="wi-result">↳ 13 confirmed bookings · Zero developer dependency · Trek module, live in production</p>
+      </div>
+
+      <div class="wi">
+        <p class="wi-ey">Freelance · Live · Solo build</p>
+        <p class="wi-title">The stays module - a second engine, fully separate by design</p>
+        <p class="wi-body">The same platform also runs hotel stays, built as a separate module from treks. A trek is one dated slot with limited seats. A stay is rooms booked across a date range, priced per night. Forcing both into one system would have made each fragile, so stays has its own tables, booking flow and payment webhook. They share only what is genuinely the same: the app shell, the security layer and one coupon engine. <strong>Availability is never stored as a number.</strong> It is worked out from bookings, blocked dates and live holds on every request, so there is no counter to drift.<br><br>The coupon engine follows the same rule. One validation path serves both, but each coupon belongs to one service, and each service decides what the discount applies to: the room price for stays, the trek price for treks, with meals left out by default so a vendor's food isn't discounted. When two payments race for a coupon's last use, the limit check and the count update run as one database statement, so the count can never pass the limit. <strong>The guest who already paid keeps their price</strong>, and the overage is logged instead of lost.</p>
+        <img src="stays-architecture.svg" alt="Stays module architecture" loading="lazy" style="width:100%;display:block;border-radius:6px;margin-bottom:14px;border:0.5px solid rgba(13,27,42,0.12);"/>
+        <img src="stays.webp" alt="Ridiviaanh stays search page" loading="lazy" style="width:100%;border-radius:6px;margin-bottom:14px;border:0.5px solid rgba(13,27,42,0.12);"/>
+        <img src="stays-admin.webp" alt="Ridiviaanh stays admin panel" loading="lazy" style="width:100%;border-radius:6px;margin-bottom:14px;border:0.5px solid rgba(13,27,42,0.12);"/>
+        <div class="wi-tags">
+          <span class="tag live">Live · ridiviaanh.com/stays.html</span>
+          <span class="tag">Node.js</span><span class="tag">MySQL</span>
+          <span class="tag">Multi-night pricing</span><span class="tag">Coupon engine</span>
+          <span class="tag">Concurrency-safe</span>
+        </div>
+        <p class="wi-result">↳ Live and onboarding · Separate module, shared infrastructure · Phase 2 in progress</p>
       </div>
 
       <div class="wi">
@@ -453,8 +469,8 @@ body::before{
         <label class="fl">Budget</label>
         <select class="fi" id="f-budget">
           <option value="">Select range</option>
-          <option>Under ₹15k</option><option>₹15k – ₹50k</option>
-          <option>₹50k – ₹1.5L</option><option>₹1.5L+</option>
+          <option>₹15k - ₹50k</option>
+          <option>₹50k - ₹1.5L</option><option>₹1.5L+</option>
           <option>Let's discuss</option>
         </select>
       </div>
